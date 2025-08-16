@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SCOREAZY - GoDB</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Playfair+Display&display=swap" rel="stylesheet" />
+<style>
+  *{margin:0;padding:0;box-sizing:border-box;}
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #1c1c1c;
+    padding: 40px 20px;
+    background: #fff;
+  }
+  .container {
+    max-width: 900px;
+    margin: auto;
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 0 25px rgba(0,0,0,0.1);
+    padding: 40px 50px;
+  }
+  .logo {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 10px;
+  }
+  .black {color: black;}
+  .green {color: green;}
+  .follow-btn {
+    background: yellow;
+    color: black;
+    padding: 12px 22px;
+    font-weight: 700;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    margin-bottom: 18px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+  }
+  .follow-btn:hover {background: gold;}
+  .quote-box {
+    background: #f3f3f3;
+    padding: 18px 25px;
+    border-left: 5px solid #00796b;
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-style: italic;
+    border-radius: 6px;
+  }
+  .voice-box {
+    background: #fffbe6;
+    color: #333;
+    border-radius: 12px;
+    padding: 22px 35px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    cursor: pointer;
+    font-size: 22px;
+    font-weight: 700;
+    border: 2px solid #f1c40f;
+    text-align: center;
+    width: fit-content;
+    margin: 20px auto;
+    user-select: none;
+  }
+  .voice-box:hover {background: #fff2b3;}
+  .click-hint {
+    background: #f1c40f;
+    color: black;
+    font-weight: 600;
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 50px;
+    margin-left: 12px;
+    vertical-align: middle;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.15);
+    user-select: none;
+    transition: background-color 0.3s;
+  }
+  .voice-box:hover .click-hint {background: #d4ac0d;}
+  .mentorship-section, .how-works-section, .mentors-section, .student-reviews-section, .cta-section {
+    margin-top: 40px;
+    text-align: center;
+  }
+  .mentorship-section h2, .how-works-section h2, .mentors-section h2, .student-reviews-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 800;
+    color: #1c1c1c;
+    margin-bottom: 30px;
+  }
+  .circle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 25px 30px;
+    justify-items: center;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  .circle {
+    background: #00796b;
+    color: white;
+    width: 120px; height: 120px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 600;
+    font-size: 14px;
+    padding: 15px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    user-select: none;
+    transition: background-color 0.3s;
+    text-align: center;
+  }
+  .circle:hover {background: #004d40;}
+  .how-works-section {
+    background: #e8f5f2;
+    border-radius: 15px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    padding: 25px 30px;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+    color: #1c1c1c;
+  }
+  .timeline {
+    max-width: 500px;
+    margin: 0 auto;
+    border-left: 3px solid #00796b;
+    padding-left: 30px;
+    counter-reset: step-counter;
+  }
+  .timeline-step {
+    position: relative;
+    padding-left: 40px;
+    font-weight: 600;
+    font-size: 18px;
+    color: #004d40;
+    user-select: none;
+    margin-bottom: 35px;
+  }
+  .timeline-step::before {
+    content: counter(step-counter);
+    counter-increment: step-counter;
+    position: absolute;
+    left: -35px;
+    top: 0;
+    background: #00796b;
+    color: white;
+    width: 30px; height: 30px;
+    border-radius: 50%;
+    line-height: 30px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 16px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+  }
+  .timeline-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    left: -18px;
+    top: 30px;
+    width: 3px;
+    height: 40px;
+    background: #00796b;
+  }
+  .step-desc {
+    font-weight: 400;
+    font-size: 14px;
+    color: #004d40;
+    margin-top: 6px;
+    line-height: 1.4;
+  }
+  .mentors-section p {
+    font-size: 16px;
+    margin-bottom: 40px;
+    color: #555;
+  }
+  .mentor-cards {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .mentor-card {
+    background: #f0f0f0;
+    border-radius: 15px;
+    padding: 20px;
+    width: 230px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    transition: box-shadow 0.3s ease;
+  }
+  .mentor-card:hover {box-shadow: 0 10px 25px rgba(0,0,0,0.2);}
+  .mentor-photo {
+    width: 110px; height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid #00796b;
+    margin-bottom: 18px;
+  }
+  .mentor-name {
+    font-weight: 700;
+    font-size: 20px;
+    margin-bottom: 6px;
+  }
+  .mentor-title {
+    color: #00796b;
+    font-weight: 600;
+    font-size: 16px;
+  }
+  .student-reviews-section {
+    max-width: 900px;
+    margin: 50px auto 0 auto;
+  }
+  .reviews-box {
+    background: #f7f7f7;
+    border-radius: 15px;
+    box-shadow: 0 0 18px rgba(0,0,0,0.1);
+    padding: 25px 30px;
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    user-select: none;
+  }
+  .review-card {
+    background: white;
+    border-radius: 10px;
+    padding: 15px 18px;
+    width: 280px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+    font-size: 12px;
+    font-style: italic;
+    color: #444;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+  }
+  .review-card img {
+    width: 70px; height: 70px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid #00796b;
+  }
+  .review-name {
+    font-weight: 700;
+    font-size: 14px;
+    color: #1c1c1c;
+  }
+  .review-class {
+    font-weight: 500;
+    font-size: 11px;
+    color: #00796b;
+  }
+  .stars {
+    color: #f1c40f;
+    font-size: 16px;
+    user-select: none;
+  }
+  .cta-section {
+    margin-top: 50px;
+    text-align: center;
+  }
+  .cta-section h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 32px;
+    font-weight: 800;
+    margin-bottom: 15px;
+    color: #1c1c1c;
+  }
+  .cta-section p {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: #555;
+  }
+  .cta-button {
+    background: #007bff;
+    color: black;
+    font-weight: bold;
+    padding: 15px 25px;
+    border-radius: 8px;
+    text-decoration: none;
+    display: inline-block;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: background-color 0.3s;
+  }
+  .cta-button:hover {
+    background: #0056b3;
+    color: white;
+  }
+  .overlay, .popup {
+    display: none;
+    position: fixed;
+    z-index: 999;
+  }
+  .overlay {
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.4);
+  }
+  .popup {
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    background: #fff;
+    border-radius: 40px / 80px;
+    padding: 30px;
+    width: 90%;
+    max-width: 700px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.2);
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+  .popup h2 {
+    font-size: 26px;
+    margin-bottom: 20px;
+    font-family: 'Playfair Display', serif;
+    color: #1c1c1c;
+  }
+  .popup p {
+    font-size: 14px;
+    line-height: 1.5;
+    color: #333;
+  }
+  .close-btn {
+    position: absolute;
+    top: 12px; right: 20px;
+    font-size: 24px;
+    color: #888;
+    background: none;
+    border: none;
+    cursor: pointer;
+    user-select: none;
+  }
+  .close-btn:hover {color: #000;}
+  @media(max-width:700px){
+    .mentor-cards, .reviews-box {
+      flex-direction: column;
+      align-items: center;
+    }
+    .circle-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .how-works-section, .mentors-section, .student-reviews-section {
+      max-width: 100%;
+      padding: 20px 15px;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="logo"><span class="black">SCOR</span><span class="green">EAZY</span></div>
+    <a class="follow-btn" href="https://www.linkedin.com/company/scoreazy" target="_blank" rel="noopener noreferrer">Follow Us</a>
+    <div class="quote-box">"They told you what to study, but did anyone ask you what you love?"</div>
+    <div class="voice-box" onclick="togglePopup()" tabindex="0" role="button" onkeypress="if(event.key==='Enter') togglePopup()" aria-label="Click to read the full story">
+      A Voice Unheard 🕯️ <span class="click-hint" aria-hidden="true">Click here 👆</span>
+    </div>
+
+    <div class="mentorship-section">
+      <h2>Why Mentorship Matters? 🤔</h2>
+      <div class="circle-grid">
+        <div class="circle">Fear of Judgment</div>
+        <div class="circle">Limited Awareness</div>
+        <div class="circle">Lack of Guidance</div>
+        <div class="circle">Fear of Disappointment</div>
+      </div>
+    </div>
+
+    <div class="how-works-section">
+      <h2>How Scoreazy Mentorship Works</h2>
+      <div class="timeline">
+        <div class="timeline-step">
+          Step 1: Sign Up
+          <div class="step-desc">Create a free profile and tell us a bit about yourself, your interests, struggles, and goals.</div>
+        </div>
+        <div class="timeline-step">
+          Step 2: Get Matched
+          <div class="step-desc">We connect you with a mentor who understands your path, not just your syllabus.</div>
+        </div>
+        <div class="timeline-step">
+          Step 3: Start Talking
+          <div class="step-desc">Schedule one-on-one conversation through chat or video. Ask anything, no judgments, only support.</div>
+        </div>
+        <div class="timeline-step">
+          Step 4: Track Growth
+          <div class="step-desc">Get a personalized growth roadmap. Follow ups and downs regularly.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="mentors-section">
+      <h2>Meet Your Mentors 🤝</h2>
+      <p>Real People, Real Journeys, Real Support. The mentors who want to support you to now guide students.</p>
+      <div class="mentor-cards">
+        <div class="mentor-card">
+          <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Anjali Roy" class="mentor-photo" />
+          <div class="mentor-name">Anjali Roy</div>
+          <div class="mentor-title">Ideological Mentor</div>
+        </div>
+        <div class="mentor-card">
+          <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Rohan Sen" class="mentor-photo" />
+          <div class="mentor-name">Rohan Sen</div>
+          <div class="mentor-title">Career Coach</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="student-reviews-section">
+      <h2>Student Reviews on ScoreEasy ⭐️</h2>
+      <div class="reviews-box">
+        <div class="review-card">
+          <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Priya" />
+          <div class="review-name">Priya</div>
+          <div class="review-class">Class 11</div>
+          <p class="review-text">Before ScoreEasy, I was confused, now I am confident in my path.</p>
+          <div class="stars">★★★★½</div>
+        </div>
+        <div class="review-card">
+          <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Amit" />
+          <div class="review-name">Amit</div>
+          <div class="review-class">Class 12</div>
+          <p class="review-text">ScoreEasy helped me find clarity and focus on my career goals.</p>
+          <div class="stars">★★★★✩</div>
+        </div>
+        <div class="review-card">
+          <img src="https://randomuser.me/api/portraits/women/52.jpg" alt="Sneha" />
+          <div class="review-name">Sneha</div>
+          <div class="review-class">Class 10</div>
+          <p class="review-text">Amazing mentorship, truly changed how I see my future.</p>
+          <div class="stars">★★★★★</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-section">
+      <h2>Ready to Start Your Journey? 🚀</h2>
+      <p>Join Scoreazy Mentorship today and take the first step toward a future you choose.</p>
+      <a href="#" class="cta-button">Click here to enroll your name</a>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="togglePopup()"></div>
+  <div class="popup" id="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title" aria-describedby="popup-desc">
+    <button class="close-btn" aria-label="Close popup" onclick="togglePopup()">&times;</button>
+    <h2 id="popup-title">A Voice Unheard</h2>
+    <p id="popup-desc">
+      Growing up in India, the pressure to choose a “safe” career was always there. Like most kids, I was told engineering is the best path — respected, stable, and well-paying. So, I set my mind on becoming an engineer, just like everyone expected me to.
+
+But honestly? I didn’t really know what I wanted. I had no idea about the many different careers out there that could match my real interests and talents. I just followed the path laid out for me, going to college, studying hard, aiming for marks — but feeling lost inside.
+
+Most of the people around me did the same. They picked engineering not because they understood their options, but because society told them to. No one ever asked, “What do you really want?”
+
+
+---
+
+And that’s when I realized — something had to change.
+
+There are so many students like me, stuck in this cycle, unaware of the opportunities waiting for them. We need guidance, someone who understands us, who can show us the paths we didn’t even know existed.
+
+
+---
+
+That’s why I believe in Scoreazy.
+
+Scoreazy is more than just a platform. It’s a mentorship program that listens to you, helps you discover your true passions, and opens doors to careers beyond the usual. It’s about building a future you choose — not one that’s chosen for you.
+    </p>
+  </div>
+
+<script>
+  function togglePopup() {
+    const popup = document.getElementById('popup');
+    const overlay = document.getElementById('overlay');
+    const isVisible = popup.style.display === 'block';
+    if (isVisible) {
+      popup.style.display = 'none';
+      overlay.style.display = 'none';
+    } else {
+      popup.style.display = 'block';
+      overlay.style.display = 'block';
+    }
+  }
+</script>
+</body>
+</html>
